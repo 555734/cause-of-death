@@ -1,0 +1,474 @@
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Serif JP', serif;
+    background-color: #000; /* 真っ黒な背景 */
+    color: #CCC; /* 全体的な文字色を明るいグレーに */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* 背景アニメーション用 */
+    position: relative;
+}
+
+/* --- グリッチエフェクト（変更なし） --- */
+.glitch-container {
+    position: relative;
+    width: fit-content; /* テキストの幅に合わせる */
+    margin: 0 auto;
+}
+
+.glitch {
+    font-family: monospace;
+    font-size: 8em; /* 年齢カウンターのフォントサイズ */
+    color: #F00;
+    text-shadow: 0 0 5px rgba(255,0,0,0.5), 0 0 10px rgba(255,0,0,0.5);
+    position: relative;
+    animation: glitch-skew 1s infinite alternate linear;
+}
+
+.glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+.glitch-overlay::before,
+.glitch-overlay::after {
+    content: attr(data-text); /* data-text属性の値を表示 */
+    content: var(--glitch-text, attr(data-text)); /* JSからの設定を優先 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* グリッチ層の背景 */
+    color: #0F0; /* 緑色のグリッチ */
+    text-shadow: 0 0 5px rgba(0,255,0,0.5);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0); /* 初期状態では非表示 */
+}
+
+/* JSでdata-textを更新する age-counter にも直接グリッチテキストを適用 */
+#age-counter::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #0FF; /* シアン色のグリッチ */
+    text-shadow: 0 0 5px rgba(0,255,255,0.5);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-anim-2 2s infinite alternate-reverse linear;
+}
+
+.glitch-overlay::before {
+    left: 2px;
+    text-shadow: -2px 0 #FF00FF; /* マゼンタ */
+    animation: glitch-anim 2s infinite alternate-reverse linear;
+}
+
+.glitch-overlay::after {
+    left: -2px;
+    text-shadow: -2px 0 #00FFFF; /* シアン */
+    animation: glitch-anim 1.5s infinite alternate linear;
+}
+
+
+@keyframes glitch-skew {
+    0% { transform: skew(0deg); }
+    25% { transform: skew(2deg); }
+    50% { transform: skew(-3deg); }
+    75% { transform: skew(1deg); }
+    100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+    5% { clip: rect(12px, 9999px, 73px, 0); }
+    10% { clip: rect(42px, 9999px, 49px, 0); }
+    15% { clip: rect(74px, 9999px, 94px, 0); }
+    20% { clip: rect(10px, 9999px, 20px, 0); }
+    25% { clip: rect(80px, 9999px, 90px, 0); }
+    30% { clip: rect(25px, 9999px, 35px, 0); }
+    35% { clip: rect(55px, 9999px, 65px, 0); }
+    40% { clip: rect(15px, 9999px, 25px, 0); }
+    45% { clip: rect(65px, 9999px, 75px, 0); }
+    50% { clip: rect(30px, 9999px, 40px, 0); }
+    55% { clip: rect(85px, 9999px, 95px, 0); }
+    60% { clip: rect(5px, 9999px, 15px, 0); }
+    65% { clip: rect(90px, 9999px, 100px, 0); }
+    70% { clip: rect(20px, 9999px, 30px, 0); }
+    75% { clip: rect(70px, 9999px, 80px, 0); }
+    80% { clip: rect(100px, 9999px, 110px, 0); }
+    85% { clip: rect(45px, 9999px, 55px, 0); }
+    90% { clip: rect(75px, 9999px, 85px, 0); }
+    95% { clip: rect(110px, 9999px, 120px, 0); }
+    100% { clip: rect(0, 9999px, 0, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(20px, 9999px, 22px, 0); }
+    5% { clip: rect(90px, 9999px, 92px, 0); }
+    10% { clip: rect(10px, 9999px, 12px, 0); }
+    15% { clip: rect(50px, 9999px, 52px, 0); }
+    20% { clip: rect(70px, 9999px, 72px, 0); }
+    25% { clip: rect(30px, 9999px, 32px, 0); }
+    30% { clip: rect(60px, 9999px, 62px, 0); }
+    35% { clip: rect(80px, 9999px, 82px, 0); }
+    40% { clip: rect(40px, 9999px, 42px, 0); }
+    45% { clip: rect(100px, 9999px, 102px, 0); }
+    50% { clip: rect(0, 9999px, 2px, 0); }
+    55% { clip: rect(110px, 9999px, 112px, 0); }
+    60% { clip: rect(120px, 9999px, 122px, 0); }
+    65% { clip: rect(130px, 9999px, 132px, 0); }
+    70% { clip: rect(140px, 9999px, 142px, 0); }
+    75% { clip: rect(150px, 9999px, 152px, 0); }
+    80% { clip: rect(160px, 9999px, 162px, 0); }
+    85% { clip: rect(170px, 9999px, 172px, 0); }
+    90% { clip: rect(180px, 9999px, 182px, 0); }
+    95% { clip: rect(190px, 9999px, 192px, 0); }
+    100% { clip: rect(200px, 9999px, 202px, 0); }
+}
+/* --- グリッチエフェクトここまで --- */
+
+#main-container {
+    background-color: rgba(0, 0, 0, 0.85); /* 半透明の黒で背景をより暗く */
+    border: 1px solid #333; /* 枠線を追加 */
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); /* 赤い光を強調 */
+    max-width: 900px; /* 最大幅を設定 */
+    width: 90%;
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 3em;
+    color: #F00; /* タイトルは強い赤 */
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(255,0,0,0.7);
+}
+
+.warning {
+    font-size: 1.1em;
+    color: #FF6666; /* 警告文は少し明るい赤 */
+    margin-bottom: 40px;
+    line-height: 1.6;
+    border: 1px dashed #FF6666; /* 警告の点線枠 */
+    padding: 20px;
+    background-color: rgba(50, 0, 0, 0.3); /* 警告背景を少し暗く */
+    border-radius: 5px;
+}
+
+#user-inputs {
+    display: flex;
+    flex-wrap: wrap; /* 小さい画面で折り返す */
+    justify-content: center;
+    align-items: flex-start; /* 上揃え */
+    gap: 40px 60px; /* 上下左右のギャップ */
+    margin: 30px 0;
+}
+
+#user-inputs > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 1.2em;
+    color: #F00; /* ラベルも赤で強調 */
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(255,0,0,0.4);
+}
+
+/* 生年月日選択 */
+#birthdate-select > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 各選択肢の間隔 */
+    flex-wrap: wrap; /* 小さい画面で折り返す */
+}
+#birthdate-select select {
+    background-color: #1a1a1a; /* 暗い背景色 */
+    border: 1px solid #800; /* 濃い赤の枠線 */
+    color: #FFF; /* 白い文字色 */
+    padding: 10px 8px;
+    font-size: 1em;
+    font-family: 'Noto Serif JP', serif;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-appearance: none; /* デフォルトの矢印を非表示 */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20fill%3D%22%23FF0000%22%20d%3D%22M208.5%2090.5L128%20171L47.5%2090.5z%22%2F%3E%3C%2Fsvg%3E'); /* 赤い下向き矢印 */
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px;
+}
+#birthdate-select select:hover {
+    border-color: #F00; /* ホバーで赤を強調 */
+    box-shadow: 0 0 5px rgba(255,0,0,0.5);
+}
+
+
+/* 性別選択 */
+#gender-select div {
+    padding-top: 10px;
+    display: flex;
+    gap: 20px; /* 性別オプションの間隔 */
+}
+#gender-select input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #F00; /* 赤い枠線 */
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 5px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+#gender-select input[type="radio"]:checked {
+    background-color: #F00; /* チェック時に赤く塗りつぶし */
+    border-color: #F00;
+    box-shadow: 0 0 8px rgba(255,0,0,0.7); /* チェック時に赤い光 */
+}
+#gender-select input[type="radio"] + label {
+    color: #FFF; /* 性別ラベルを白に */
+    font-size: 1.1em;
+    margin-bottom: 0; /* ラベルのデフォルトマージンをリセット */
+    text-shadow: none; /* ラベルのテキストシャドウを削除 */
+}
+
+button {
+    background-color: #F00; /* ボタンの背景を赤 */
+    color: #FFF;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.3em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 40px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+    box-shadow: 0 0 15px rgba(255,0,0,0.5);
+}
+button:hover {
+    background-color: #E00; /* ホバーで少し暗く */
+    box-shadow: 0 0 25px rgba(255,0,0,0.8);
+    transform: translateY(-2px); /* 少し浮き上がる */
+}
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(255,0,0,0.4);
+}
+
+/* 図鑑ボタン */
+#dex-button {
+    background-color: #1a1a1a;
+    border: 1px solid #F00;
+    margin-left: 20px; /* 開始ボタンとの間隔 */
+}
+#dex-button:hover {
+    background-color: #333;
+    border-color: #FF4444;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+/* シミュレーション画面 */
+#simulation-screen p {
+    font-size: 1.5em;
+    color: #AAA; /* YEARS OLDの文字色 */
+    margin-top: 15px;
+    letter-spacing: 2px;
+}
+
+/* 結果画面 */
+#result-screen {
+    padding: 20px; /* 全体的なパディング */
+}
+
+#result-cause {
+    font-size: 2.8em; /* 死因のフォントサイズをさらに大きく */
+    font-weight: bold;
+    color: #F00; /* 死因を赤く強調 */
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(255,0,0,0.8); /* 強めのシャドウ */
+}
+#result-details {
+    font-size: 1.6em; /* 詳細テキストのフォントサイズを大きく */
+    line-height: 1.8;
+    color: #FFF; /* 詳細テキストは白 */
+    margin-bottom: 30px;
+    text-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+#result-rank {
+    font-size: 1.3em;
+    color: #BBB; /* ランキングは明るいグレー */
+    margin-top: 25px;
+    border-top: 1px dashed #666; /* ダッシュ線を強調 */
+    padding-top: 20px;
+    line-height: 1.5;
+}
+
+/* タイプライターのカーソル */
+.typing-effect::after {
+    content: '█';
+    animation: blink 1s step-end infinite;
+    color: #F00;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+#memory-message {
+    color: #999;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    border: 1px dashed #444;
+    padding: 10px;
+    line-height: 1.5;
+    background-color: rgba(20, 0, 0, 0.2);
+}
+
+/* 壊れたサイト感のメッセージ */
+#bug-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'monospace';
+    font-size: 1.8em;
+    color: #F00;
+    text-shadow: 0 0 10px rgba(255,0,0,0.8);
+    background-color: rgba(0,0,0,0.8);
+    padding: 10px 20px;
+    border: 2px solid #F00;
+    z-index: 1000; /* 他の要素より手前に表示 */
+    opacity: 0; /* 初期は非表示 */
+    animation: bug-message-fadeout 0.8s forwards; /* 表示後すぐに消えるアニメーション */
+}
+
+/* 壊れたサイトメッセージのフェードアウトアニメーション */
+@keyframes bug-message-fadeout {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+
+/* 監視されている感のメッセージ */
+#surveillance-message {
+    color: #AAA;
+    font-size: 1.1em;
+    margin-top: 30px;
+    opacity: 0; /* 初期は非表示 */
+    transition: opacity 2s ease-in-out; /* ゆっくりフェードイン */
+    line-height: 1.6;
+}
+#surveillance-message.show {
+    opacity: 1;
+}
+
+/* --- ▼▼▼ ここから追加 ▼▼▼ --- */
+/* 死因図鑑モーダル */
+#dex-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#dex-content {
+    background-color: #050505;
+    border: 1px solid #500;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+}
+
+#dex-content h2 {
+    color: #F00;
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(255,0,0,0.6);
+}
+
+#dex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.dex-item {
+    border: 1px solid #444;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 1.2em;
+    background-color: #111;
+}
+
+.dex-item.unlocked {
+    color: #FFF;
+    border-color: #800;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.dex-item.locked {
+    color: #555;
+    font-family: monospace;
+}
+
+#dex-completion-message {
+    color: #ff6666;
+    font-size: 1.3em;
+    line-height: 1.7;
+    border: 1px dashed #F00;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgba(100, 0, 0, 0.2);
+}
+
+#dex-close-button {
+    margin-top: 10px; /* h2とのマージンがあるので少し小さく */
+}
+/* --- ▲▲▲ ここまで追加 ▲▲▲ --- */

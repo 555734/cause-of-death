@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>死因シミュレーター</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="main-container">
+        <div id="start-screen">
+            <h1>死因シミュレーター</h1>
+            <p id="memory-message"></p>
+            <p class="warning">
+                【警告】<br>
+                このコンテンツは、あなたの未来を予測するものではありません。<br>
+                令和5年の厚生労働省の統計データに基づいた確率で、<br>
+                あなたの死の瞬間をシミュレートするホラーコンテンツです。<br>
+                強い恐怖や不安を感じる可能性がありますので、自己責任でご利用ください。
+            </p>
+            <div id="user-inputs">
+                <div id="birthdate-select">
+                    <label>あなたの生年月日</label>
+                    <div>
+                        <select id="birth-year"></select> 年
+                        <select id="birth-month"></select> 月
+                        <select id="birth-day"></select> 日
+                    </div>
+                </div>
+                <div id="gender-select">
+                    <label>あなたの性別</label>
+                    <div>
+                        <input type="radio" id="male" name="gender" value="male" checked>
+                        <label for="male">男性</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">女性</label>
+                    </div>
+                </div>
+            </div>
+            <button id="start-button">運命のシミュレーションを開始する</button>
+            <button id="dex-button">死因図鑑</button> </div>
+
+        <div id="simulation-screen" class="hidden">
+            <div class="glitch-container">
+                <div id="age-counter" class="glitch" data-text="0">0</div>
+                <div class="glitch-overlay"></div>
+            </div>
+            <div id="bug-message" class="hidden"></div>
+            <p>YEARS OLD</p>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <button id="retry-button">もう一度、運命を知る</button>
+        </div>
+    </div>
+
+    <div id="dex-modal" class="hidden">
+        <div id="dex-content">
+            <h2>死因図鑑</h2>
+            <div id="dex-grid"></div>
+            <p id="dex-completion-message" class="hidden"></p>
+            <button id="dex-close-button">閉じる</button>
+        </div>
+    </div>
+
+    <audio id="ambient-sound" src="https://soundeffect-lab.info/sound/environment/mp3/wind-creepy1.mp3" loop></audio>
+    <audio id="heartbeat-sound" src="https://soundeffect-lab.info/sound/anime/mp3/heart-beat2.mp3" loop></audio>
+    <audio id="jumpscare-sound" src="https://soundeffect-lab.info/sound/horror/mp3/scream-woman1.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
